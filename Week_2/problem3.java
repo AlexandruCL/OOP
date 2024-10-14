@@ -5,7 +5,7 @@ class Complex{
         this.re=re;
         this.im=im;
     }
-    public double modulus(){
+    public void modulus(){
         System.out.println("This is the modulus: "+Math.sqrt(re*re+im*im));
     }
     public void print(){
