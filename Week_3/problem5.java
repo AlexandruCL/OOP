@@ -1,88 +1,110 @@
-class Book{
+class Book {
     private String title;
     private String author;
-    public Book(String title, String author)
-    {
+
+    public Book(String title, String author) {
         this.title = title;
         this.author = author;
     }
 
+    public String getTitle() {
+        return title;
+    }
 
-    public String toString(){
-        return "title: '" + this.title + "', author: " + this.author;
+    public String getAuthor() {
+        return author;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Book) {
+            Book other = (Book) obj;
+            return this.title.equals(other.title) && this.author.equals(other.author);
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Book: " + title + " by " + author;
     }
 }
-
-class Set{
-    private int max_num;
+class Set {
     private Book[] books;
-    private int current_num;
+    private int size;
+    private int capacity;
 
-    public Set(int max_num){
-        this.max_num = max_num;
-        this.books = new Book[max_num];
-        this.current_num = 0;
+    public Set(int capacity) {
+        this.capacity = capacity;
+        this.books = new Book[capacity];
+        this.size = 0;
     }
 
-    public boolean addBook(Book b){
-        if(current_num >= max_num){
+    public boolean addBook(Book book) {
+        if (size >= capacity) {
             return false;
         }
 
-        for(int i=0; i<current_num; i++){
-            if(books[i].equals(b)) return false;
+        for (int i = 0; i < size; i++) {
+            if (books[i].equals(book)) {
+                return false;
+            }
         }
 
-        books[current_num] = b;
-        current_num++;
+        books[size] = book;
+        size++;
         return true;
     }
 
-    public Set union(Set other){
-        Set unionSet = new Set(this.max_num + other.max_num);
+    public static Set union(Set set1, Set set2) {
+        Set resultSet = new Set(set1.capacity + set2.capacity);
 
-        for(int i=0; i<this.current_num; i++){
-            unionSet.addBook(this.books[i]);
+        for (int i = 0; i < set1.size; i++) {
+            resultSet.addBook(set1.books[i]);
         }
 
-        for(int i=0; i<other.current_num; i++){
-            unionSet.addBook(other.books[i]);
+        for (int i = 0; i < set2.size; i++) {
+            resultSet.addBook(set2.books[i]);
         }
-        return unionSet;
+
+        return resultSet;
     }
 
-    public void print(){
-        for(int i=0; i<this.current_num; i++){
+    public void printSet() {
+        for (int i = 0; i < size; i++) {
             System.out.println(books[i]);
         }
     }
-
-
 }
+public class problem5 {
+    public static void main(String[] args) {
+        Set set1 = new Set(5);
+        Set set2 = new Set(5);
 
-class Client{
-    public static void main(String[] args){
-    Set set1 = new Set(2);
-    Set set2 = new Set(3);
-    Book b1 = new Book("Ion", "Liviu Rebreanu");
-    Book b2 = new Book("Moara cu noroc", "Ioan Slavici");
-    Book b3 = new Book("Ion", "Mihail Sadoveanu");
-    Book b4 = new Book("Enigma Otiliei", "George Calinescu"); 
-    Book b5 = new Book("Ultima noapte de dragoste, intaia noapte de razboi", "Camil Petrescu");
-    Book b6 = b5;
+        Book book1 = new Book("Baltagul", "Mihail Sadoveanu");
+        Book book2 = new Book("Ion", "Liviu Rebreanu");
+        Book book3 = new Book("Morometii", "Marin Preda");
+        Book book4 = new Book("Enigma Otiliei", "George Călinescu");
+        Book book5 = new Book("La Medeleni", "Ionel Teodoreanu");
 
-    System.out.println("Adding book1: " + set1.addBook(b1));
-    System.out.println("Adding book2: " + set1.addBook(b2));
-    System.out.println("Adding book3: " + set1.addBook(b3));
-    System.out.println("Adding book3: " + set2.addBook(b4));
-    System.out.println("Adding book5: " + set2.addBook(b5));
-    System.out.println("Adding book6: " + set2.addBook(b6));
+        System.out.println(set1.addBook(book1));
+        System.out.println(set1.addBook(book2));
+        System.out.println(set1.addBook(book3));
+        System.out.println(set1.addBook(book1));
 
-    Set unionSet = set1.union(set2);
-    unionSet.print();
-    
+        System.out.println(set2.addBook(book3));
+        System.out.println(set2.addBook(book4));
+        System.out.println(set2.addBook(book5));
 
+        System.out.println("Set 1:");
+        set1.printSet();
+        
+        System.out.println("Set 2:");
+        set2.printSet();
+
+        Set unionSet = Set.union(set1, set2);
+
+        System.out.println("Union of Set 1 and Set 2:");
+        unionSet.printSet();
     }
-    
-    
 }
