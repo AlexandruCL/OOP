@@ -1,5 +1,4 @@
 class Book{
-    private int numberOf_pages;
     private String title;
     private String author;
     public Book(String title, String author)
@@ -54,7 +53,6 @@ class Set{
 
     public void print(){
         for(int i=0; i<this.current_num; i++){
-            int book_no = i+1;
             System.out.println(books[i]);
         }
     }
