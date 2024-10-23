@@ -41,18 +41,12 @@ class Folder{
             content += f.getConet() + "\n";
         return content.trim();
     }
-    public static void main(String [] args){
-        File f1 = new File("I am the file number 1", "File");
-        File f2 = new File("This is file number 2", "File 2");
-        File f3 = new File("this is fwquifbnviwuenrf 3", "File 3");
-
+}
+class FolderClient {
+    public static void main(String[] args) {
         Folder folder = new Folder();
-        folder.addFile(f1);
-        folder.addFile(f2);
-        folder.addFile(f3);
-        
-        String allContentString = folder.getContent();
-        System.out.println(allContentString);
-
+        folder.addFile(new File("Hello, ", "file1"));
+        folder.addFile(new File("World!", "file2"));
+        System.out.println(folder.getContent());
     }
 }

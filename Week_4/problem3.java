@@ -8,7 +8,7 @@ class Acronymus{
         words = new String[CAPACITY];
         acronym = new String[CAPACITY];
     }
-    public boolean add(String new_word, String new_acronym){
+    public boolean addWord(String new_word, String new_acronym){
         if(counter >= CAPACITY) return false;
         for(int i=0; i<counter; i++){
             if(words[i].equalsIgnoreCase(new_word)){
@@ -28,25 +28,16 @@ class Acronymus{
         return "XXXXX";
     }
 }
-class AcronymClient{
-    public static void main(String []args){
-        Acronymus ac = new Acronymus();
-        ac.add("Banca nationala a romaniei", "bnr");
-        ac.add("Banca comerciala romana", "bcr");
-        ac.add("ministerul apararii interne", "mai");
+class AcronymsClient {
+    public static void main(String[] args) {
+        Acronymus acronyms = new Acronymus();
+        acronyms.addWord("HyperText Markup Language", "HTML");
+        acronyms.addWord("Cascading Style Sheets", "CSS");
+        acronyms.addWord("JavaScript", "JS");
 
-        ac.add("Banca natoinala a romaniei", "bnr100");
-
-        for(int i = 0; i < 17; i++){
-            ac.add("abc" + (i+1), "abc" + (i+1));
-        }
-
-        System.out.println(ac.add("this should fail cause of capacity exceeded", "tsf"));
-
-        System.out.println(ac.getWord("bnr"));
-        System.out.println(ac.getWord("bcr"));
-        System.out.println(ac.getWord("mai"));
-        System.out.println(ac.getWord("abc15"));
-        
+        System.out.println(acronyms.getWord("HTML")); // Output: HyperText Markup Language
+        System.out.println(acronyms.getWord("CSS"));  // Output: Cascading Style Sheets
+        System.out.println(acronyms.getWord("JS"));   // Output: JavaScript
+        System.out.println(acronyms.getWord("PHP"));  // Output: XXXX
     }
 }
