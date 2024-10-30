@@ -92,9 +92,15 @@ class Folder
         return false;
 
     }
-
+    public void intersect(Folder other)
+    {
+        for(File f: files)
+        {
+            if(other.containsFile(f))
+                System.out.println(f.getContent1());
+        }
+    }
 }
-
 
 public class Main {
     public static void main(String[] args) {
@@ -104,12 +110,16 @@ public class Main {
         File file4 = new File("File4", "This is the content of File 4.");
 
         Folder folder = new Folder();
+        Folder folder2 = new Folder();
 
         folder.addFile(file1);
         folder.addFile(file2);
         folder.addFile(file3);
         folder.addFile(file1); // Attempt to add a duplicate
         folder.addFile(file4);
+
+        folder2.addFile(file1);
+        folder2.addFile(file3);
 
         System.out.println("Folder content:\n" + folder.getContent());
 
@@ -118,5 +128,8 @@ public class Main {
 
         System.out.println("Contains File1: " + folder.containsFile(file1));
         System.out.println("Contains File2: " + folder.containsFile(file2));
+
+        System.out.println("Intersection of folder and folder2:");
+        folder.intersect(folder2);
     }
 }
