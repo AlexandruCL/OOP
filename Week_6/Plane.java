@@ -220,12 +220,14 @@ class FleetManagement {
         // System.out.println("\n");
         // fleet.getAnyPlane(2);
         // System.out.println("\n");
-        System.out.println("Fighter plane with index 0 :");
-        System.out.println(fleet.getFighterPlane(0));
+        final int index1 = 0;
+        final int index2 = 6;
+        System.out.println("Fighter plane with index " + index1 + " :");
+        System.out.println(fleet.getFighterPlane(index1));
         System.out.println("\n");
 
-        System.out.println("Fighter plane with index 3 :");
-        System.out.println(fleet.getFighterPlane(3));
+        System.out.println("Fighter plane with index " + index2 + " :");
+        System.out.println(fleet.getFighterPlane(index2));
         System.out.println("\n");
 
 
