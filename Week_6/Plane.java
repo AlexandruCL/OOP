@@ -185,11 +185,11 @@ class Fleet{
         return totalPassengerCapacity;
     }
 
-    public void getAnyPlane(int index){
+    public void getAnyPlane(int id){
         Plane[] allPlanes = new Plane[currentpassengersPlanes + currentfighterPlanes];
         System.arraycopy(passengersPlanes, 0, allPlanes, 0, currentpassengersPlanes);
         System.arraycopy(fighterPlanes, 0, allPlanes, currentpassengersPlanes, currentfighterPlanes);
-        System.out.println(allPlanes[index-1]);
+        System.out.println(allPlanes[id-1]);
     }
 }
 
