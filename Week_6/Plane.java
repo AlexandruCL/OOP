@@ -41,11 +41,17 @@ abstract class PassengersPlane extends Plane{
     public int getMaxPassengers(){
         return this.maxPassengers;
     }
+
 }
 
 class Boeing extends PassengersPlane{
     public Boeing(int maxPassengers, int powerEngine){
         super(maxPassengers, powerEngine);
+    }
+    
+    @Override
+    public String toString(){
+        return "Boeing Plane with ID: " + this.getPlaneID() + " with max passengers: "+ this.getMaxPassengers() + " with power: " + this.getTotalEnginePower();
     }
 }
 
@@ -60,11 +66,17 @@ class Concorde extends PassengersPlane{
     }
 
     public void goSuperSonic(){
-        System.out.println("Concorde " + this.getPlaneID() + " Supersonic Mode Activated");
+        System.out.println("Concorde with ID: " + this.getPlaneID() + " Supersonic Mode Activated");
     }
 
     public void goSubSonic(){
-        System.out.println("Concorde " + this.getPlaneID() + " Supersonic Mode Deactivated");
+        System.out.println("Concorde with ID: " + this.getPlaneID() + " Supersonic Mode Deactivated");
+    }
+
+    
+    @Override
+    public String toString(){
+        return "Concorde Plane with ID: " + this.getPlaneID()+ " with max passengers: "+ this.getMaxPassengers() + " with power: " + this.getTotalEnginePower();
     }
 }
 
@@ -73,7 +85,7 @@ abstract class FighterPlane extends Plane{
         super(powerEngine);
     }
     public void launchMissile(){
-        System.out.println("Fighter Plane " + this.getPlaneID() + " Launching rocket");
+        System.out.println("Fighter Plane with ID: " + this.getPlaneID() + " Launching rocket");
     }
 }
 
@@ -82,11 +94,17 @@ class MIG extends FighterPlane{
         super(powerEngine);
     }  
     public void highSpeedGeometry(){
-        System.out.println("MIG " + this.getPlaneID() + " High Speed selected geometry");
+        System.out.println("MIG with ID: " + this.getPlaneID() + " High Speed selected geometry");
     }
 
     public void normalGeometry(){
-        System.out.println("MIG " + this.getPlaneID() + " Normal Speed selected geometry");
+        System.out.println("MIG with ID: " + this.getPlaneID() + " Normal Speed selected geometry");
+    }
+
+    
+    @Override
+    public String toString(){
+        return "MIG Plane with ID: " + this.getPlaneID() + " with power: " + this.getTotalEnginePower();
     }
 }
 
@@ -96,7 +114,13 @@ class TomCat extends FighterPlane{
     }
 
     public void refuel(){
-        System.out.println("TomCat " + this.getPlaneID() + " Refueling");
+        System.out.println("TomCat with ID: " + this.getPlaneID() + " Refueling");
+    }
+
+    
+    @Override
+    public String toString(){
+        return "TomCat Plane with ID: " + this.getPlaneID() + " with power: " + this.getTotalEnginePower();
     }
 }
 
@@ -128,7 +152,7 @@ class Fleet{
         }
     }
 
-    public FighterPlane getgFighterPlane(int index){
+    public FighterPlane getFighterPlane(int index){
         if(fighterPlanes[index] == null){
             return null;
         }
@@ -160,36 +184,76 @@ class Fleet{
         }
         return totalPassengerCapacity;
     }
+
+    public void getAnyPlane(int index){
+        Plane[] allPlanes = new Plane[currentpassengersPlanes + currentfighterPlanes];
+        System.arraycopy(passengersPlanes, 0, allPlanes, 0, currentpassengersPlanes);
+        System.arraycopy(fighterPlanes, 0, allPlanes, currentpassengersPlanes, currentfighterPlanes);
+        System.out.println(allPlanes[index-1]);
+    }
 }
 
 class FleetManagement {
     public static void main(String[] args) {
         Fleet fleet = new Fleet();
 
-        Boeing boeing1 = new Boeing(300, 1000);
+        Boeing boeing1 = new Boeing(300, 5000);
         Boeing boeing2 = new Boeing(350, 1100);
         Concorde concorde1 = new Concorde(100, 1500);
         MIG mig1 = new MIG(2000);
         TomCat tomcat1 = new TomCat(1800);
-
+        TomCat tomcat2 = new TomCat(1900);
+        TomCat tomcat3 = new TomCat(3000);
+        
         fleet.addPlane(boeing1);
         fleet.addPlane(boeing2);
         fleet.addPlane(concorde1);
         fleet.addPlane(mig1);
         fleet.addPlane(tomcat1);
+        fleet.addPlane(tomcat2);
+        fleet.addPlane(tomcat3);
+
+        // boeing1.takeOff();
+        // boeing1.land();
+        // boeing1.fly();
+        //fleet.getAnyPlane(4);
+        // System.out.println("\n");
+        // fleet.getAnyPlane(2);
+        // System.out.println("\n");
+        System.out.println("Fighter plane with index 0 :");
+        System.out.println(fleet.getFighterPlane(0));
+        System.out.println("\n");
+
+        System.out.println("Fighter plane with index 3 :");
+        System.out.println(fleet.getFighterPlane(3));
+        System.out.println("\n");
+
 
         System.out.println("Total Passenger Capacity: " + fleet.getTotalPassengerCapacity());
+        System.out.println("\n");
 
         Plane strongestPlane = fleet.getStrongestPlane();
         if (strongestPlane != null) {
-            System.out.println("Strongest Plane ID: " + strongestPlane.getPlaneID() + " with power: " + strongestPlane.getTotalEnginePower());
+            if(strongestPlane instanceof TomCat)
+                System.out.println("Strongest Plane: TomCat with ID: " + strongestPlane.getPlaneID() + " with power: " + strongestPlane.getTotalEnginePower());
+            else if(strongestPlane instanceof MIG)
+                System.out.println("Strongest Plane: MIG with ID: " + strongestPlane.getPlaneID() + " with power: " + strongestPlane.getTotalEnginePower());
+            else if(strongestPlane instanceof Concorde)
+                System.out.println("Strongest Plane: Concorde with ID: " + strongestPlane.getPlaneID() + " with power: " + strongestPlane.getTotalEnginePower());
+            else if(strongestPlane instanceof Boeing)
+                System.out.println("Strongest Plane: Boeing with ID: " + strongestPlane.getPlaneID() + " with power: " + strongestPlane.getTotalEnginePower());
         }
+        System.out.println("\n");
 
         concorde1.goSuperSonic();
         concorde1.goSubSonic();
+        System.out.println("\n");
+
         mig1.launchMissile();
         mig1.highSpeedGeometry();
         mig1.normalGeometry();
+        System.out.println("\n");
+        tomcat1.launchMissile();
         tomcat1.refuel();
     }
 }
