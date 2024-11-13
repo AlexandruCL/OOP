@@ -153,6 +153,10 @@ class Fleet{
     }
 
     public FighterPlane getFighterPlane(int index){
+        if(index >=0 && index <100){
+            System.out.println("Index out of bounds.\n");
+            return null;
+        }
         if(fighterPlanes[index] == null){
             return null;
         }
