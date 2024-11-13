@@ -185,19 +185,19 @@ class Fleet{
         return totalPassengerCapacity;
     }
 
-    public void getAnyPlane(int id){
-        Plane[] allPlanes = new Plane[currentpassengersPlanes + currentfighterPlanes];
-        System.arraycopy(passengersPlanes, 0, allPlanes, 0, currentpassengersPlanes);
-        System.arraycopy(fighterPlanes, 0, allPlanes, currentpassengersPlanes, currentfighterPlanes);
-        System.out.println(allPlanes[id-1]);
-    }
+    // public void getAnyPlane(int id){
+    //     Plane[] allPlanes = new Plane[currentpassengersPlanes + currentfighterPlanes];
+    //     System.arraycopy(passengersPlanes, 0, allPlanes, 0, currentpassengersPlanes);
+    //     System.arraycopy(fighterPlanes, 0, allPlanes, currentpassengersPlanes, currentfighterPlanes);
+    //     System.out.println(allPlanes[id-1]);
+    // }
 }
 
 class FleetManagement {
     public static void main(String[] args) {
         // Instantiate planes using type inheritance
-        Plane concorde1 = new Concorde(5000, 100);
-        Plane boeing1 = new Boeing(4000, 200);
+        Plane concorde1 = new Concorde(100, 5000);
+        Plane boeing1 = new Boeing(200, 4000);
         Plane mig1 = new MIG(6000);
         Plane tomcat1 = new TomCat(7000);
 
