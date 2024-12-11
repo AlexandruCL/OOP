@@ -77,13 +77,13 @@ public class Main {
 
                     //trying to extract the id
                     //making sure that the string from the csv table is a number using the custom parseInt method
-                    int id = parseInt(line[0].trim());
+                    int id = checkInt(line[0].trim());
 
                     //extracting the name
                     String name = line[1].trim();
 
                     //doing the same for age as I did for the id
-                    int age = parseInt(line[2].trim());
+                    int age = checkInt(line[2].trim());
 
                     //finally, extracting the email
                     String email = line[3].trim();
@@ -91,24 +91,20 @@ public class Main {
                     //adding a new person with the extracted fields
                     people.add(new Person(id,name,age,email));
 
-                }catch (InvalidDataFormatException | DataTypeException e){ //possible exceptions to catch from this block (line75)
-                    // data type exception will be caught this time in order for the program not to crash when such an exception is thrown
+                }catch (InvalidDataFormatException | DataTypeException e){ // catch the exceptions if there are any
                     System.out.println(e.getMessage());
                 }
             }
-        } catch (IOException e) { //this catches the exception caused by input file (checked exception)
+        } catch (IOException e) { //this catches the exception caused by input file
             System.out.println(e.getMessage());
         }
         return people;
     }
 
-    //I made this method in order to not agglomerate my code
-    //basically, by having this I don't have to throw exceptions when I try to extract id and age from the file
-    private static int parseInt(String s) {
-
+    private static int checkInt(String s) {
         try{
             return Integer.parseInt(s);
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             throw new DataTypeException("Invalid Data type found with cause: " + e.getMessage(), e);
         }
     }

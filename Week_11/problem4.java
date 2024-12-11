@@ -54,7 +54,7 @@ public class problem4 {
 
     public static void main(String[] args) {
 
-        String path = "C:\\Users\\Patri\\AN2_sem1\\OOP\\Assignment9\\src\\list1.csv";
+        String path = "D:\\An_2\\OOP\\Week_11\\assignment9PersonList.csv";
         Set<Person> people = readCSV(path);
 
         System.out.println(people);
