@@ -43,6 +43,7 @@ class Person{
         }
         return false;
     }
+
     @Override
     public int hashCode(){
         return Objects.hash(id);
@@ -75,20 +76,14 @@ public class Main {
                         throw  new InvalidDataFormatException( "The line is invalid: " + Arrays.toString(line) + ". It has " + line.length + " fields instead of 4.");
                     }
 
-                    //trying to extract the id
-                    //making sure that the string from the csv table is a number using the custom parseInt method
                     int id = checkInt(line[0].trim());
 
-                    //extracting the name
                     String name = line[1].trim();
 
-                    //doing the same for age as I did for the id
                     int age = checkInt(line[2].trim());
 
-                    //finally, extracting the email
                     String email = line[3].trim();
 
-                    //adding a new person with the extracted fields
                     people.add(new Person(id,name,age,email));
 
                 }catch (InvalidDataFormatException | DataTypeException e){ // catch the exceptions if there are any

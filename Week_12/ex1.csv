@@ -1,0 +1,5 @@
+1,John Doe,30,john.doe@example.com,2020-01-15
+2,Alice Smith,25,alice.smith@example.com,2019-04-20
+3,Bob Johnson,40,bob.johnson@example.com,invalid-date
+4,Charlie Brown,35,charlie.brown@example.com,2018-11-10
+5,David White,invalid-age,david.white@example.com,2021-08-25
